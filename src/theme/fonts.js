@@ -1,12 +1,12 @@
 const customFonts = {
-  "Poppins-Italic": require("../assets/fonts/poppins/Poppins-Italic.ttf"),
+  "Fellix-Italic": require("../assets/fonts/Fellix-Font/Fellix-RegularItalic.ttf"),
 
-  "Poppins-Regular": require("../assets/fonts/poppins/Poppins-Regular.ttf"),
-  "Poppins-Black": require("../assets/fonts/poppins/Poppins-Black.ttf"),
-  "Poppins-Medium": require("../assets/fonts/poppins/Poppins-Medium.ttf"),
-  "Poppins-Light": require("../assets/fonts/poppins/Poppins-Light.ttf"),
-  "Poppins-SemiBold": require("../assets/fonts/poppins/Poppins-SemiBold.ttf"),
-  "Poppins-Bold": require("../assets/fonts/poppins/Poppins-Bold.ttf"),
+  "Fellix-Regular": require("../assets/fonts/Fellix-Font/Fellix-Regular.ttf"),
+  "Fellix-Black": require("../assets/fonts/Fellix-Font/Fellix-Black.ttf"),
+  "Fellix-Medium": require("../assets/fonts/Fellix-Font/Fellix-Medium.ttf"),
+  "Fellix-Light": require("../assets/fonts/Fellix-Font/Fellix-Light.ttf"),
+  "Fellix-SemiBold": require("../assets/fonts/Fellix-Font/Fellix-SemiBold.ttf"),
+  "Fellix-Bold": require("../assets/fonts/Fellix-Font/Fellix-Bold.ttf"),
 };
 
 export default customFonts;

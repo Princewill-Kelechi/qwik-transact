@@ -1,7 +1,11 @@
 import React from "react";
-import { View, StyleSheet, SafeAreaView } from "react-native";
-import globalStyles from "../../../styles/globalStyles";
+import { View, StyleSheet, SafeAreaView, Text } from "react-native";
+import { CustomText } from "../../../components";
 
-const SignUp = () => {
-  return <View style={globalStyles.main}></View>;
-};
+export default function SignUp() {
+  return (
+    <SafeAreaView>
+      <CustomText.BodyLarge>I Love God</CustomText.BodyLarge>
+    </SafeAreaView>
+  );
+}
