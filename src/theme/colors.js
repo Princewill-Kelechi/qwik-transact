@@ -1,10 +1,12 @@
 export const colors = {
-  primary: "#0468EF",
-  primaryLight: "#0468ef19",
+  // primary: "#0468EF",
+  // primaryLight: "#0468ef19",
+  primary: "rgba(66, 85, 253, 1)",
   black: "#000000",
   white: "#ffffff",
   green: "#27AE60",
   grey: "#A2A0A0",
+  grey1: "rgba(51, 51, 51, 1)",
   gray6: "#F2F2F2",
   gray5: "#E0E0E0",
   gray4: "#BDBDBD",
@@ -19,4 +21,5 @@ export const colors = {
   veryDarkBlue: "#000080",
   mediumDarkBlue: "#0000FF",
   transparent: "#00000000",
+  primaryGray: "rgba(50, 50, 50, 1)",
 };

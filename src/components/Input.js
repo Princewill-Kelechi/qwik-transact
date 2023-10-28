@@ -46,21 +46,17 @@ const Input = ({
     },
     textInput: {
       flex: 1,
-      fontFamily: "Poppins-Regular",
+      fontFamily: "Fellix-Regular",
       color: colors.black,
       fontSize: wp(14),
       lineHeight: hp(20),
-      //   marginTop: showLabel || value ? hp(4) : 0,
-      // marginHorizontal: leftElement || rightElement ? hp(12) : 0,
       marginLeft: leftElement ? hp(12) : 0,
       marginRight: rightElement ? hp(12) : 0,
       paddingVertical: 0,
       textAlign,
-      // width: "80%",
     },
     errorInput: {
       borderWidth: 1,
-      // borderColor: colors.red,
     },
     errorText: {
       marginTop: 10,
@@ -71,16 +67,20 @@ const Input = ({
   return (
     <View style={inputContainerStyles}>
       {label && (
-        <CustomText.BodyLarge fontFamily="Poppins-Bold" fontSize={wp(18)}>
+        <CustomText.BodySmall
+          fontFamily="Fellix-SemiBold"
+          marginBottom={wp(8)}
+          fontSize={wp(18)}
+        >
           {label}
-        </CustomText.BodyLarge>
+        </CustomText.BodySmall>
       )}
       <View style={[styles.inputContainer, inputStyles]}>
         <View>{leftElement}</View>
 
         <TextInput
           style={[
-            { fontFamily: "Poppins-Regular", width: inputWidth },
+            { fontFamily: "Fellix-Regular", width: inputWidth },
             textInputStyle,
           ]}
           placeholder={placeholder}

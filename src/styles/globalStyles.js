@@ -1,9 +1,19 @@
 import { StyleSheet } from "react-native";
+import { hp, wp } from "../utils/responsive-dimension";
 
 export default globalStyles = StyleSheet.create({
   main: {
     display: "flex",
     flex: 1,
   },
-  container: {},
+  uicontainer: {
+    width: "100%",
+    height: "100%",
+    marginTop: hp(50),
+    paddingHorizontal: wp(20),
+  },
+  flexRow: {
+    display: "flex",
+    flexDirection: "row",
+  },
 });

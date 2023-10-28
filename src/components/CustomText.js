@@ -5,7 +5,7 @@ import { wp } from "../utils/responsive-dimension";
 const Header = ({ children, ...rest }) => {
   return (
     <BaseText
-      fontFamily="Poppins-Bold"
+      fontFamily="Fellix-Bold"
       fontSize={wp(20)}
       lineHeight={wp(27)}
       letterSpacing={wp(0.15)}
