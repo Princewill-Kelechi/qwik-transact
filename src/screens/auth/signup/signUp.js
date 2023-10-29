@@ -1,11 +1,21 @@
 import React from "react";
-import { View, StyleSheet, SafeAreaView, Text, ScrollView } from "react-native";
+import {
+  View,
+  StyleSheet,
+  SafeAreaView,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 import { CustomText, Input, Button } from "../../../components";
 import globalStyles from "../../../styles/globalStyles";
 import { wp, hp } from "../../../utils/responsive-dimension";
 import { colors } from "../../../theme/colors";
+import { useNavigation } from "@react-navigation/native";
 
 export default function SignUp() {
+  const navigation = useNavigation();
+
   const styles = StyleSheet.create({
     header: {
       marginTop: wp(20),
@@ -29,7 +39,10 @@ export default function SignUp() {
 
   return (
     <SafeAreaView style={globalStyles.main}>
-      <ScrollView style={globalStyles.uicontainer}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={globalStyles.uicontainer}
+      >
         <View style={styles.header}>
           <View style={styles.headerText}>
             <CustomText.Header fontSize={wp(24)} color={colors.grey1}>
@@ -136,9 +149,11 @@ export default function SignUp() {
           <CustomText.BodyLarge color={colors.primaryGray}>
             Already have an account?
           </CustomText.BodyLarge>
-          <CustomText.BodyLarge color={colors.primary}>
-            Log in
-          </CustomText.BodyLarge>
+          <TouchableOpacity onPress={() => navigation.navigate("SignIn")}>
+            <CustomText.BodyLarge color={colors.primary}>
+              Log in
+            </CustomText.BodyLarge>
+          </TouchableOpacity>
         </View>
         <View
           style={[

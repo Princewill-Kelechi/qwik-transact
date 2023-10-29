@@ -8,6 +8,10 @@ import { useFonts } from "expo-font";
 import customFonts from "./src/theme/fonts";
 import { AppLoading } from "expo";
 import * as SplashScreen from "expo-splash-screen";
+import ResetPassword from "./src/screens/auth/forgotPassword/resetPassword";
+import BaseApp from "./src/navigation/Navigator";
+import { store } from "./src/redux/store";
+import { Provider } from "react-redux";
 
 export default function App() {
   const [fontsLoaded] = useFonts(customFonts);
@@ -33,8 +37,10 @@ export default function App() {
   }
 
   return (
-    <SafeAreaProvider>
-      <SignUp />
-    </SafeAreaProvider>
+    <Provider store={store}>
+      <SafeAreaProvider>
+        <BaseApp />
+      </SafeAreaProvider>
+    </Provider>
   );
 }
