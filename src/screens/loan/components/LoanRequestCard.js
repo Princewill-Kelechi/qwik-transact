@@ -4,41 +4,21 @@ import { CustomText } from "../../../components";
 import { wp } from "../../../utils/responsive-dimension";
 import { colors } from "../../../theme/colors";
 import { ChevronDownIcon, ChevronUpIcon } from "../../../assets/icons";
-import { maleAvatar } from "../../../theme/images";
+import { maleAvatar, maleAvatar2 } from "../../../theme/images";
 
-const LoanCard = ({ loanData }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  const toggleAccordion = () => {
-    setIsExpanded(!isExpanded);
-  };
-
+const LoanRequestCard = ({ loanData, onPress }) => {
   const styles = StyleSheet.create({
     loanCard: {
-      height: isExpanded ? wp(126) : wp(63),
+      height: wp(63),
       width: wp(380),
       elevation: wp(10),
       marginBottom: wp(40),
     },
   });
 
-  const getStatusColor = (status) => {
-    if (status == "paid") {
-      return colors.green;
-    }
-    if (status == "due") {
-      return colors.error;
-    }
-    if (status == "pending") {
-      return colors.darkOrange;
-    }
-  };
-
-  const statusColor = getStatusColor(loanData.status);
-
   return (
     <View style={styles.loanCard}>
-      <TouchableOpacity onPress={toggleAccordion}>
+      <TouchableOpacity onPress={onPress}>
         <View
           style={{
             flexDirection: "row",
@@ -55,7 +35,7 @@ const LoanCard = ({ loanData }) => {
             }}
           >
             <Image
-              source={maleAvatar}
+              source={maleAvatar2}
               style={{
                 marginRight: wp(10),
                 width: wp(43),
@@ -77,9 +57,7 @@ const LoanCard = ({ loanData }) => {
                 >
                   {loanData.name}
                 </CustomText.BodyLarge>
-                <View style={{ marginLeft: wp(8) }}>
-                  {isExpanded ? <ChevronUpIcon /> : <ChevronDownIcon />}
-                </View>
+                <View style={{ marginLeft: wp(8) }}></View>
               </View>
               <CustomText.BodyLarge>
                 Return on :{" "}
@@ -98,41 +76,11 @@ const LoanCard = ({ loanData }) => {
             >
               {loanData?.amount}
             </CustomText.BodyLarge>
-            <CustomText.BodyLarge color={statusColor}>
-              {loanData?.status}
-            </CustomText.BodyLarge>
           </View>
         </View>
-        {isExpanded && (
-          <View
-            style={{
-              padding: 6,
-              paddingHorizontal: wp(53),
-            }}
-          >
-            <CustomText.BodySmall>
-              Gave out on{" "}
-              <CustomText.BodySmall color={colors.black}>
-                {loanData?.loanDate}
-              </CustomText.BodySmall>
-            </CustomText.BodySmall>
-            <CustomText.BodySmall marginTop={wp(10)}>
-              Interest rate is{" "}
-              <CustomText.BodySmall color={colors.black}>
-                {loanData?.interestRate}%
-              </CustomText.BodySmall>
-            </CustomText.BodySmall>
-            <CustomText.BodySmall marginTop={wp(6)}>
-              After due date{" "}
-              <CustomText.BodySmall color={colors.black}>
-                {loanData?.interestRateAfterDeadline}%
-              </CustomText.BodySmall>
-            </CustomText.BodySmall>
-          </View>
-        )}
       </TouchableOpacity>
     </View>
   );
 };
 
-export default LoanCard;
+export default LoanRequestCard;

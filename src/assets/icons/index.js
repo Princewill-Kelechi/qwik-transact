@@ -26,6 +26,13 @@ import WebsiteIcon from "./WebsiteIcon";
 import LogoutIcon from "./LogoutIcon";
 import SearchIcon from "./SearchIcon";
 import FilterIcon from "./FilterIcon";
+import ChevronDownIcon from "./ChevronDownIcon";
+import ChevronUpIcon from "./ChevronUpIcon";
+import CancelIcon from "./CancelIcon";
+import LocationIcon2 from "./LocationIcon2";
+import PhoneIcon from "./PhoneIcon";
+import EmailIcon from "./EmailIcon";
+import DirectionsIcon from "./DirectionsIcon";
 
 export {
   ArrowBackIcon,
@@ -55,4 +62,11 @@ export {
   WebsiteIcon,
   LogoutIcon,
   SearchIcon,
+  ChevronDownIcon,
+  ChevronUpIcon,
+  CancelIcon,
+  LocationIcon2,
+  PhoneIcon,
+  EmailIcon,
+  DirectionsIcon,
 };

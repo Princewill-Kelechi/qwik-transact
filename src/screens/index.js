@@ -8,6 +8,7 @@ import EnterEmail from "./auth/forgotPassword/enterEmail";
 import HomeScreen from "./home/HomesScreen";
 import ProfileScreen from "./more/ProfileScreen";
 import LoanScreen from "./loan/LoanScreen";
+import ILocateScreen from "./i-locate/ILocateScreen";
 
 export {
   SignUp,

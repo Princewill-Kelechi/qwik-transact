@@ -16,6 +16,7 @@ import { wp } from "../utils/responsive-dimension";
 import CustomBottomTab from "./components/CustomBottomTab";
 import { Platform } from "react-native";
 import AuthNavigator from "./AuthNavigator";
+import ILocateScreen from "../screens/i-locate/ILocateScreen";
 
 const Stack = createStackNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -84,6 +85,18 @@ const LoanNavigator = () => {
   );
 };
 
+const LocateNavigator = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Stack.Screen name="I-LocateScreen" component={ILocateScreen} />
+    </Stack.Navigator>
+  );
+};
+
 const ProfileNavigator = () => {
   return (
     <Stack.Navigator
@@ -92,26 +105,6 @@ const ProfileNavigator = () => {
       }}
     >
       <Stack.Screen name="Profile" component={ProfileScreen} />
-    </Stack.Navigator>
-  );
-};
-
-const AddCarNavigator = () => {
-  return (
-    <Stack.Navigator
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
-      <Stack.Screen name="SignIn" component={SignIn} />
-      <Stack.Screen name="SignUp" component={SignUp} />
-      <Stack.Screen name="ResetPassword" component={ResetPassword} />
-      <Stack.Screen
-        name="VerifyLandingScreen"
-        component={VerifyLandingScreen}
-      />
-      <Stack.Screen name="VerifyLostEmail" component={VerifyLostEmail} />
-      <Stack.Screen name="EnterEmail" component={EnterEmail} />{" "}
     </Stack.Navigator>
   );
 };
@@ -133,7 +126,7 @@ const TabNavigator = () => {
       />
       <BottomTab.Screen
         name="i-Locate"
-        component={DummyNavigator}
+        component={LocateNavigator}
         options={{
           tabBarLabel: "i-Locate",
         }}
