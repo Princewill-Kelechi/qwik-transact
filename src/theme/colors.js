@@ -22,4 +22,5 @@ export const colors = {
   mediumDarkBlue: "#0000FF",
   transparent: "#00000000",
   primaryGray: "rgba(50, 50, 50, 1)",
+  veryLightBlue: "'#0468EF",
 };

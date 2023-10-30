@@ -6,6 +6,7 @@ import { CustomText } from "../../components";
 import { CardIcon, HomeIcon } from "../../assets/icons";
 import LocationIcon from "../../assets/icons/LocationIcon";
 import MoreIcon from "../../assets/icons/MoreIcon";
+import LoanIcon from "../../assets/icons/LoanIcon";
 
 function CustomBottomTab({ state, descriptors, navigation }) {
   const activeColorStroke = colors.veryDarkBlue;
@@ -56,9 +57,9 @@ function CustomBottomTab({ state, descriptors, navigation }) {
                   color={isFocused ? activeColorStroke : inactiveColorStroke}
                 />
               );
-            case "Card":
+            case "Loan":
               return (
-                <CardIcon
+                <LoanIcon
                   width={28}
                   height={20}
                   active={isFocused}

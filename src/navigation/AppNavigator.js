@@ -6,6 +6,9 @@ import {
   VerifyLandingScreen,
   VerifyLostEmail,
   EnterEmail,
+  HomeScreen,
+  ProfileScreen,
+  LoanScreen,
 } from "../screens";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -57,6 +60,30 @@ const DummyNavigator = () => {
   );
 };
 
+const HomeNavigator = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Stack.Screen name="HomeScreen" component={HomeScreen} />
+    </Stack.Navigator>
+  );
+};
+
+const LoanNavigator = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Stack.Screen name="LoanScreen" component={LoanScreen} />
+    </Stack.Navigator>
+  );
+};
+
 const ProfileNavigator = () => {
   return (
     <Stack.Navigator
@@ -64,15 +91,7 @@ const ProfileNavigator = () => {
         headerShown: false,
       }}
     >
-      <Stack.Screen name="SignIn" component={SignIn} />
-      <Stack.Screen name="SignUp" component={SignUp} />
-      <Stack.Screen name="ResetPassword" component={ResetPassword} />
-      <Stack.Screen
-        name="VerifyLandingScreen"
-        component={VerifyLandingScreen}
-      />
-      <Stack.Screen name="VerifyLostEmail" component={VerifyLostEmail} />
-      <Stack.Screen name="EnterEmail" component={EnterEmail} />
+      <Stack.Screen name="Profile" component={ProfileScreen} />
     </Stack.Navigator>
   );
 };
@@ -107,7 +126,7 @@ const TabNavigator = () => {
     >
       <BottomTab.Screen
         name="Home"
-        component={AppNavigator}
+        component={HomeNavigator}
         options={{
           tabBarLabel: "Home",
         }}
@@ -120,15 +139,15 @@ const TabNavigator = () => {
         }}
       />
       <BottomTab.Screen
-        name="Card"
-        component={DummyNavigator}
+        name="Loan"
+        component={LoanNavigator}
         options={{
-          tabBarLabel: "Card",
+          tabBarLabel: "Loan",
         }}
       />
       <BottomTab.Screen
         name="More"
-        component={DummyNavigator}
+        component={ProfileNavigator}
         options={{
           tabBarLabel: "More",
         }}

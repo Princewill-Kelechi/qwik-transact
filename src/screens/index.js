@@ -5,6 +5,9 @@ import VerifyEmail from "./auth/signup/verifyEmail";
 import ResetPassword from "./auth/forgotPassword/resetPassword";
 import VerifyLostEmail from "./auth/forgotPassword/verifyLostEmail";
 import EnterEmail from "./auth/forgotPassword/enterEmail";
+import HomeScreen from "./home/HomesScreen";
+import ProfileScreen from "./more/ProfileScreen";
+import LoanScreen from "./loan/LoanScreen";
 
 export {
   SignUp,
@@ -14,4 +17,7 @@ export {
   VerifyLostEmail,
   EnterEmail,
   ResetPassword,
+  HomeScreen,
+  ProfileScreen,
+  LoanScreen,
 };
