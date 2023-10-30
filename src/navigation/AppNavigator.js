@@ -17,6 +17,7 @@ import CustomBottomTab from "./components/CustomBottomTab";
 import { Platform } from "react-native";
 import AuthNavigator from "./AuthNavigator";
 import ILocateScreen from "../screens/i-locate/ILocateScreen";
+import CreateLoan from "../screens/loan/CreateLoanScreen";
 
 const Stack = createStackNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -69,6 +70,7 @@ const HomeNavigator = () => {
       }}
     >
       <Stack.Screen name="HomeScreen" component={HomeScreen} />
+      <Stack.Screen name="CreateLoanScreen" component={CreateLoan} />
     </Stack.Navigator>
   );
 };
@@ -81,6 +83,7 @@ const LoanNavigator = () => {
       }}
     >
       <Stack.Screen name="LoanScreen" component={LoanScreen} />
+      <Stack.Screen name="CreateLoanScreen" component={CreateLoan} />
     </Stack.Navigator>
   );
 };

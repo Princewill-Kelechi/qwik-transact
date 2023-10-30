@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   View,
   StyleSheet,
@@ -36,9 +36,44 @@ import {
 } from "../../theme/images";
 import { LinearGradient } from "expo-linear-gradient";
 import LoanIcon from "../../assets/icons/LoanIcon";
+import { BASE_URL } from "../../utils/constants";
+import { useSelector, useDispatch } from "react-redux";
+import { AlertHelper } from "../../utils/AlertHelper";
+import { setProfile } from "../../redux/auth/authSlice";
 
 export default function HomeScreen() {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const { token, profile } = useSelector((state) => state.auth);
+
+  const fetchProfile = async () => {
+    await fetch(BASE_URL + "profile", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("Failed to fetch user profile");
+        }
+      })
+      .then((data) => {
+        console.log(data);
+        AlertHelper.show("success", "success", "Got Profile");
+        dispatch(setProfile(data));
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
+  useEffect(() => {
+    fetchProfile();
+  }, []);
 
   const styles = StyleSheet.create({
     header: {
@@ -156,7 +191,7 @@ export default function HomeScreen() {
               marginTop={wp(5)}
               fontWeight={wp(400)}
             >
-              Juliet Edike
+              {profile?.fullName}
             </CustomText.BodyLarge>
           </View>
           <View style={[globalStyles.flexRow, styles.iconContainer2]}>
@@ -196,7 +231,7 @@ export default function HomeScreen() {
                   color={colors.white}
                   fontSize={wp(18)}
                 >
-                  ₦ 150,000.00
+                  ₦ {profile?.balance}
                 </CustomText.BodyLarge>
               </View>
               <ThreeDotIcon />
@@ -305,7 +340,10 @@ export default function HomeScreen() {
                 Near-by Agent
               </CustomText.BodySmall>
             </View>
-            <View style={styles.linkContainer}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("CreateLoanScreen")}
+              style={styles.linkContainer}
+            >
               <View style={styles.accesslink}>
                 <CreateLoanIcon />
               </View>
@@ -316,7 +354,7 @@ export default function HomeScreen() {
               >
                 Create Loan
               </CustomText.BodySmall>
-            </View>
+            </TouchableOpacity>
             <View style={styles.linkContainer}>
               <View style={styles.accesslink}>
                 <TopUpIcon />

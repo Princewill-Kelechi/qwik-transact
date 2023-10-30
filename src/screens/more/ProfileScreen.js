@@ -46,9 +46,13 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import LoanIcon from "../../assets/icons/LoanIcon";
 import ChevronRightIcon from "../../assets/icons/ChevronRightIcon";
+import { UseSelector, useDispatch, useSelector } from "react-redux";
+import { logOut } from "../../redux/auth/authSlice";
 
 export default function ProfileScreen() {
   const navigation = useNavigation();
+  const { profile, token } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
   const styles = StyleSheet.create({
     header: {
@@ -420,6 +424,7 @@ export default function ProfileScreen() {
               }}
             >
               <TouchableOpacity
+                onPress={() => navigation.goBack()}
                 style={[
                   styles.btn2,
                   {
@@ -435,6 +440,7 @@ export default function ProfileScreen() {
                 </CustomText.BodyLarge>
               </TouchableOpacity>
               <TouchableOpacity
+                onPress={() => dispatch(logOut())}
                 style={[
                   styles.btn2,
                   {

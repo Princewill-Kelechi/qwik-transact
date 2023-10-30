@@ -1,4 +1,10 @@
-import React, { useCallback, useMemo, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useMemo,
+  useRef,
+  useState,
+  useEffect,
+} from "react";
 import {
   View,
   StyleSheet,
@@ -21,14 +27,49 @@ import CustomBottomSheet from "../../components/CustomBottomSheet";
 import { maleAvatar, maleAvatar2 } from "../../theme/images";
 import { loanDataArray } from "../../utils/loanData";
 import LoanRequestCard from "./components/LoanRequestCard";
+import { UseSelector, useDispatch, useSelector } from "react-redux";
+import { BASE_URL } from "../../utils/constants";
+import { AlertHelper } from "../../utils/AlertHelper";
 
 export default function LoanScreen() {
   const navigation = useNavigation();
   const [loanState, setLoanState] = useState("Loan gave out");
 
   const [isSheetOpen, setIsSheetOpen] = useState(false);
-  const [modalOpen, setModalOpen] = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [givenLoans, setGivenLoans] = useState([]);
   const [tempLoan, setTempLoan] = useState();
+
+  const { profile, token } = useSelector((state) => state.auth);
+
+  const fetchLoans = async () => {
+    await fetch(BASE_URL + "given-loans", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("Failed to fetch user loans");
+        }
+      })
+      .then((data) => {
+        console.log(data);
+        setGivenLoans(data);
+        AlertHelper.show("success", "success", "Got Loans");
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
+  useEffect(() => {
+    fetchLoans();
+  }, []);
 
   function BottomSheetCard() {
     return (

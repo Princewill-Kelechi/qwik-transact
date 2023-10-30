@@ -7,48 +7,51 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-import { CustomText, Input, Button } from "../../../components";
-import globalStyles from "../../../styles/globalStyles";
-import { wp, hp } from "../../../utils/responsive-dimension";
-import { colors } from "../../../theme/colors";
+import { CustomText, Input, Button } from "../../components";
+import globalStyles from "../../styles/globalStyles";
+import { wp, hp } from "../../utils/responsive-dimension";
+import { colors } from "../../theme/colors";
 import { useNavigation } from "@react-navigation/native";
-import { BASE_URL } from "../../../utils/constants";
+import { BASE_URL } from "../../utils/constants";
 
-export default function SignUp() {
+export default function CreateLoan() {
   const navigation = useNavigation();
 
-  const [fullName, setFullName] = useState("");
-  const [username, setUserName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phoneNo, setPhoneNo] = useState("");
-  const [password1, setPassword1] = useState("");
-  const [password2, setPassword2] = useState("");
+  const [maxLoanAmount, setMaxLoanamount] = useState("");
+  const [statePreference, setStatePreference] = useState("");
+  const [totalFunds, setTotalFunds] = useState("");
+  const [interestRate, setInterestRate] = useState("");
+  const [allowableLoanDuration, setAllowedduration] = useState("");
+  const [loanConditions, setLoanConditions] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const signUpData = {
-    fullName: fullName,
-    username: username,
-    email: email,
-    phoneNo: phoneNo,
-    password: password2,
+  const loanData = {
+    maxLoanAmount: maxLoanAmount,
+    totalFunds: totalFunds,
+    interestRate: interestRate,
+    statePreference: statePreference,
+    allowableLoanDuration: allowableLoanDuration,
+    // repaymentPlan: any,
+    loanConditions: loanConditions,
+    // requiredDocuments: any,
   };
 
-  const signUp = async () => {
+  const createLoan = async () => {
     setLoading(true);
-    fetch(BASE_URL + "register", {
+    fetch(BASE_URL + "lend", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(signUpData),
+      body: JSON.stringify(loanData),
     })
       .then((response) => {
-        console.log(response)
+        console.log(response);
         if (response.ok) {
           setLoading(false);
           return response.json();
         } else {
-          throw new Error("sign up failed");
+          throw new Error("Create Loan failed");
         }
       })
       .then((data) => {
@@ -91,7 +94,7 @@ export default function SignUp() {
         <View style={styles.header}>
           <View style={styles.headerText}>
             <CustomText.Header fontSize={wp(24)} color={colors.grey1}>
-              Welcome To
+              Create Loan on
             </CustomText.Header>
             <CustomText.Header fontSize={wp(24)} color={colors.primary}>
               {" "}
@@ -99,7 +102,7 @@ export default function SignUp() {
             </CustomText.Header>
           </View>
           <CustomText.BodyLarge marginTop={wp(10)}>
-            let's get to know you more
+            Be in charge, set your rates
           </CustomText.BodyLarge>
         </View>
         <View style={styles.formContainer}>
@@ -110,11 +113,11 @@ export default function SignUp() {
               fontSize={wp(18)}
               color={colors.gray2}
             >
-              Full name
+              Max loan amount
             </CustomText.BodySmall>
             <Input
-              placeholder="Enter full name"
-              onChangeText={(text) => setFullName(text)}
+              placeholder="Enter max loan amount"
+              onChangeText={(text) => setMaxLoanamount(text)}
             />
           </View>
           <View style={styles.inputContainer}>
@@ -124,11 +127,11 @@ export default function SignUp() {
               fontSize={wp(18)}
               color={colors.gray2}
             >
-              Email
+              Total funds
             </CustomText.BodySmall>
             <Input
-              placeholder="Enter email address"
-              onChangeText={(text) => setEmail(text)}
+              placeholder="Enter Total Funds"
+              onChangeText={(text) => setTotalFunds(text)}
             />
           </View>
           <View style={styles.inputContainer}>
@@ -138,11 +141,11 @@ export default function SignUp() {
               fontSize={wp(18)}
               color={colors.gray2}
             >
-              Phone Number
+              Interest Rate
             </CustomText.BodySmall>
             <Input
-              placeholder="Enter your phone number"
-              onChangeText={(text) => setPhoneNo(text)}
+              placeholder="Enter your desired interest rate"
+              onChangeText={(text) => setInterestRate(text)}
             />
           </View>
           <View style={styles.inputContainer}>
@@ -152,11 +155,11 @@ export default function SignUp() {
               fontSize={wp(18)}
               color={colors.gray2}
             >
-              Username
+              State Preference
             </CustomText.BodySmall>
             <Input
-              placeholder="Enter username"
-              onChangeText={(text) => setUserName(text)}
+              placeholder="Enter Loan Preference"
+              onChangeText={(text) => setStatePreference(text)}
             />
           </View>
           <View style={styles.inputContainer}>
@@ -166,12 +169,11 @@ export default function SignUp() {
               fontSize={wp(18)}
               color={colors.gray2}
             >
-              Password
+              allowableLoanDuration
             </CustomText.BodySmall>
             <Input
-              secureTextEntry
-              placeholder="Enter password"
-              onChangeText={(text) => setPassword1(text)}
+              placeholder="Enter Allow Loan Duration"
+              onChangeText={(text) => setAllowedduration(text)}
             />
           </View>
 
@@ -182,83 +184,19 @@ export default function SignUp() {
               fontSize={wp(18)}
               color={colors.gray2}
             >
-              Confirm Password
+              Loan Conditions
             </CustomText.BodySmall>
             <Input
-              placeholder="Confirm password"
-              secureTextEntry
-              onChangeText={(text) => setPassword2(text)}
+              placeholder="Set Loan Conditions"
+              onChangeText={(text) => setLoanConditions(text)}
             />
           </View>
           <Button
             marginTop={wp(50)}
             loading={loading}
-            onPress={() => signUp()}
-            title={"Sign Up"}
+            onPress={() => createLoan()}
+            title={"Create Loan"}
           />
-        </View>
-
-        <View
-          style={{
-            flexDirection: "row",
-            marginTop: wp(30),
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <View style={styles.divider}></View>
-          <CustomText.BodyLarge paddingHorizontal={wp(10)}>
-            OR
-          </CustomText.BodyLarge>
-          <View style={styles.divider}></View>
-        </View>
-        <Button
-          borderColor={colors.primary}
-          borderWidth={wp(2)}
-          backgroundColor={colors.white}
-          marginTop={wp(30)}
-          textColor={colors.primary}
-          disabled={true}
-          title={"Signup with BVN"}
-        />
-        <View
-          style={[
-            globalStyles.flexRow,
-            { alignSelf: "center", marginTop: wp(20) },
-          ]}
-        >
-          <CustomText.BodyLarge color={colors.primaryGray}>
-            Already have an account?
-          </CustomText.BodyLarge>
-          <TouchableOpacity onPress={() => navigation.navigate("SignIn")}>
-            <CustomText.BodyLarge color={colors.primary}>
-              Log in
-            </CustomText.BodyLarge>
-          </TouchableOpacity>
-        </View>
-        <View
-          style={[
-            {
-              flexDirection: "row",
-              alignSelf: "center",
-              paddingVertical: wp(30),
-            },
-          ]}
-        >
-          <CustomText.BodyLarge textAlign="center">
-            By Signing up, you agree to our{" "}
-            {
-              <CustomText.BodyLarge color={colors.primary}>
-                terms of services
-              </CustomText.BodyLarge>
-            }{" "}
-            and that you have read our{" "}
-            {
-              <CustomText.BodyLarge color={colors.primary}>
-                privacy policy
-              </CustomText.BodyLarge>
-            }{" "}
-          </CustomText.BodyLarge>
         </View>
       </ScrollView>
     </SafeAreaView>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   StyleSheet,
@@ -11,14 +11,57 @@ import { CustomText, Input, Button } from "../../../components";
 import globalStyles from "../../../styles/globalStyles";
 import { wp, hp } from "../../../utils/responsive-dimension";
 import { colors } from "../../../theme/colors";
-import { useGetTestResponseQuery } from "../../../redux/auth/authApi";
+import {
+  useGetTestResponseQuery,
+  useSignInMutation,
+} from "../../../redux/auth/authApi";
 import { useNavigation } from "@react-navigation/native";
+import { BASE_URL } from "../../../utils/constants";
+import { useSelector, useDispatch } from "react-redux";
+import { setToken, logIn } from "../../../redux/auth/authSlice";
 
 export default function SignIn() {
-  const { data, error, isLoading } = useGetTestResponseQuery("bulbasaur");
   const navigation = useNavigation();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  console.log(data);
+  const dispatch = useDispatch();
+
+  const loginData = {
+    username: username,
+    password: password,
+  };
+
+  const signIn = async () => {
+    setLoading(true);
+    fetch(BASE_URL + "/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(loginData),
+    })
+      .then((response) => {
+        if (response.ok) {
+          setLoading(false);
+          return response.json();
+        } else {
+          throw new Error("Login failed");
+        }
+      })
+      .then((data) => {
+        dispatch(setToken(data?.token));
+        dispatch(logIn());
+        console.log(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        setLoading(false);
+      });
+  };
+
   const styles = StyleSheet.create({
     header: {
       marginTop: wp(20),
@@ -70,7 +113,10 @@ export default function SignIn() {
             >
               Username
             </CustomText.BodySmall>
-            <Input placeholder="Enter username" />
+            <Input
+              placeholder="Enter username"
+              onChangeText={(text) => setUsername(text)}
+            />
           </View>
           <View style={styles.inputContainer}>
             <CustomText.BodySmall
@@ -81,7 +127,10 @@ export default function SignIn() {
             >
               Password
             </CustomText.BodySmall>
-            <Input placeholder="Enter password" />
+            <Input
+              placeholder="Enter password"
+              onChangeText={(text) => setPassword(text)}
+            />
           </View>
           <TouchableOpacity onPress={() => navigation.navigate("EnterEmail")}>
             <CustomText.BodySmall alignSelf={"flex-end"} marginTop={wp(10)}>
@@ -89,7 +138,12 @@ export default function SignIn() {
             </CustomText.BodySmall>
           </TouchableOpacity>
 
-          <Button marginTop={wp(150)} disabled={true} title={"Login"} />
+          <Button
+            marginTop={wp(150)}
+            onPress={() => signIn()}
+            title={"Login"}
+            loading={loading}
+          />
         </View>
 
         <View
